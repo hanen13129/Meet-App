@@ -44,7 +44,7 @@ Scenario 1: Show cached data when there’s no internet connection.
 •Then cached data shows events from previous session.
 
 Scenario 2: Show error when user changes the settings (city, time range).
-• Given a user is offline
+• Given a user is offline. 
 • When the user changes the settings
 • Then an error message is displayed
 
