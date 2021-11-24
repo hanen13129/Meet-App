@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-
+import { shallow, mount } from 'enzyme';
 class NumberOfEvents extends Component {
   state = {
     numberOfEvents: 32
   }
-  handleInputChanged = (event) => {
+  handleNumberInputChanged = (event) => {
     const value = event.target.value;
     this.setState({
       numberOfEvents: value,
@@ -17,11 +17,12 @@ class NumberOfEvents extends Component {
         type="text"
         className="number-events-input"
         value={this.state.numberOfEvents}
-        onChange={this.handleInputChanged}
+        onChange={this.handleNumberInputChanged}
         />
       </div>
     );
   }
+
 }
 
 export default NumberOfEvents;
