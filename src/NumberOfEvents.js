@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { shallow, mount } from 'enzyme';
+import { ErrorAlert } from './Alert'
 class NumberOfEvents extends Component {
   state = {
     numberOfEvents: 32
