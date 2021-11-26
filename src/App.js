@@ -7,6 +7,7 @@ import { getEvents, extractLocations } from './api';
 import './nprogress.css';
 import {Container, Row} from 'react-bootstrap'
 import './App.scss';
+import { InfoAlert } from './Alert';
 
 class App extends Component {
   state = {
