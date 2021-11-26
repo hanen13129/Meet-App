@@ -58,7 +58,13 @@ export const getEvents = async () => {
   }
 
 
-  const token = await getAccessToken();
+  
+  
+    if (!navigator.onLine) {
+    const data = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return data?JSON.parse(data).events:[];;
+  }
   const removeQuery = () => {
     if (window.history.pushState && window.location.pathname) {
       var newurl =
@@ -72,6 +78,7 @@ export const getEvents = async () => {
       window.history.pushState("", "", newurl);
     }
   };
+  const token = await getAccessToken();
   if (token) {
     removeQuery();
     const url = 'https://jwny98fnd8.execute-api.us-west-1.amazonaws.com/dev/api/get-events' + token;
@@ -81,6 +88,7 @@ export const getEvents = async () => {
       localStorage.setItem("lastEvents", JSON.stringify(result.data));
       localStorage.setItem("locations", JSON.stringify(locations));
     }
+   
     NProgress.done();
     return result.data.events;
   }
