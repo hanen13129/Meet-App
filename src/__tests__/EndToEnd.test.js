@@ -3,33 +3,32 @@ import puppeteer from 'puppeteer';
 describe('show/hide an event details', () => {
   let browser;
   let page;
-  jest.setTimeout(900 * 1000);
-
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    jest.setTimeout(300000);
+    browser = await puppeteer.launch({ headless: true });
     page = await browser.newPage();
-    await page.goto('http://localhost:3000/');
-    await page.waitForSelector('.event');
+    await page.goto("http://localhost:3000/");
+    await page.waitForSelector('.EventItem');
   });
 
   afterAll(() => {
     browser.close();
   });
 
-  test('An event element is collapsed by default', async () => {
-    const eventDetails = await page.$('.event .more-info.hide');
+  test('An Event element is collaped by default', async () => {
+    const eventDetails = await page.$('.EventItem .eventDetails');
     expect(eventDetails).toBeNull();
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.event .show-more');
-    const eventDetails = await page.$('.event .more-info.show');
+    await page.click('.EventItem .ToggleButton');
+    const eventDetails = await page.$('.EventItem .eventDetails');
     expect(eventDetails).toBeDefined();
   });
 
   test('User can collapse an event to hide its details', async () => {
-    await page.click('.event .show-more');
-    const eventDetails = await page.$('.event .more-info.hide');
+    await page.click('.EventItem .ToggleButton');
+    const eventDetails = await page.$('.EventItem .eventDetails');
     expect(eventDetails).toBeNull();
   });
 
