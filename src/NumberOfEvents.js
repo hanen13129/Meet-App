@@ -1,29 +1,39 @@
-import React, {Component} from 'react';
-import { shallow, mount } from 'enzyme';
-import { ErrorAlert } from './Alert'
+import React, { Component } from 'react';
+import { ErrorAlert } from './Alert';
+
 class NumberOfEvents extends Component {
+  
   state = {
-    numberOfEvents: 32
+    numberOfEvents: 12,
+    errorText: ''
   }
-  handleNumberInputChanged = (event) => {
-    const value = event.target.value;
-    this.setState({
-      numberOfEvents: value,
-    });
+  
+  handleInputChanged = (event) => {
+    const number = event.target.value;
+    if (number <= 0 || number > 99) {
+      return this.setState({
+        errorText: 'Please enter a number between 0 and 99',
+        numberOfEvents:''
+      });
+    } else {
+      this.setState({ 
+        numberOfEvents: number,
+        errorText: '',
+      });
+      this.props.updateEventCount(event.target.value);
+    }
   };
+
   render() {
     return (
-      <div className="numberOfEvents">
-        <input
-        type="text"
-        className="number-events-input"
-        value={this.state.numberOfEvents}
-        onChange={this.handleNumberInputChanged}
-        />
+      <div>
+        <p>Limit search results </p>
+        
+        <input type="number" id="numberInput" value={this.state.numberOfEvents} className="numberInput" onChange={(e) => this.handleInputChanged(e)} />
+        <div className="errorText"><ErrorAlert text={this.state.errorText} /></div>
       </div>
     );
   }
-
 }
 
 export default NumberOfEvents;
