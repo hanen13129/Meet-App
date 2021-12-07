@@ -55,3 +55,7 @@ events without an internet connection.
 :small_orange_diamond: Given the main page is open
 :small_orange_diamond: When the user wants to see the location of events
 :small_orange_diamond: Then a chart showing the cities and the events happening in them is displayed
+
+
+## :white_check_mark:Link to the deployed API
+https://hanen13129.github.io/meet/
